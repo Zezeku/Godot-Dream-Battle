@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Assets/ResourceBars/EnergyPoint.gd" type="Script" id=1]
+[ext_resource path="res://Assets/ResourceBars/EnergyBarBack.png" type="Texture" id=2]
+[ext_resource path="res://Assets/ResourceBars/EnergyBarFill.tres" type="Texture" id=3]
+
+[node name="EnergyBar" type="TextureProgress"]
+margin_right = 100.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 100, 14 )
+texture_under = ExtResource( 2 )
+texture_progress = ExtResource( 3 )
+nine_patch_stretch = true
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
