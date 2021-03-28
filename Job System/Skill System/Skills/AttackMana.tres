@@ -1,0 +1,19 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://Job System/Skill System/Skills/SkillType.gd" type="Script" id=1]
+[ext_resource path="res://Job System/Skill System/SkillEffects/DamageEffect.tres" type="Resource" id=2]
+[ext_resource path="res://Job System/Mana System/Mana.tres" type="Resource" id=3]
+
+[resource]
+script = ExtResource( 1 )
+skill_name = "AttackMana"
+tool_tip = "Basic Attack"
+manaType = ExtResource( 3 )
+mana_cost = 0
+damageRange = 3
+damageAOERange = 0
+multiplier = 1.0
+buffStat = [  ]
+buffAmount = [  ]
+buffTimer = [  ]
+skillEffect = [ ExtResource( 2 ) ]

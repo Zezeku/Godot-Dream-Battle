@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="CubeMesh" id=1]
+
+[sub_resource type="SpatialMaterial" id=2]
+flags_transparent = true
+flags_vertex_lighting = true
+params_blend_mode = 1
+albedo_color = Color( 1, 0.823529, 0, 1 )
+
+[node name="ActiveCharacterIndicator" type="MeshInstance"]
+transform = Transform( 0.45, 0, 0, 0, 0.01, 0, 0, 0, 0.45, 0, 0, 0 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )

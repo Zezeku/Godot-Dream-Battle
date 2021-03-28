@@ -1,0 +1,20 @@
+[gd_resource type="Resource" load_steps=5 format=2]
+
+[ext_resource path="res://Job System/Skill System/Skills/SkillType.gd" type="Script" id=1]
+[ext_resource path="res://Job System/Mana System/Energy.tres" type="Resource" id=2]
+[ext_resource path="res://Job System/Skill System/SkillEffects/DamageEffect.tres" type="Resource" id=3]
+[ext_resource path="res://Job System/Skill System/SkillEffects/BuffEffect.tres" type="Resource" id=4]
+
+[resource]
+script = ExtResource( 1 )
+skill_name = "Smash"
+tool_tip = "Use energy to smash an enemy for increased physical damage"
+manaType = ExtResource( 2 )
+mana_cost = 5
+damageRange = 3
+damageAOERange = 0
+multiplier = 1.2
+buffStat = [ 7 ]
+buffAmount = [ 20.0 ]
+buffTimer = [ 3.0 ]
+skillEffect = [ ExtResource( 3 ), ExtResource( 4 ) ]

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" load_steps=5 format=2]
+
+[ext_resource path="res://Job System/Jobs/JobStats.gd" type="Script" id=1]
+[ext_resource path="res://Job System/Mana System/Spirit.tres" type="Resource" id=2]
+[ext_resource path="res://Assets/PlayerAnimationRogue.tres" type="SpriteFrames" id=3]
+[ext_resource path="res://Job System/Skill System/Skills/AttackSpirit.tres" type="Resource" id=4]
+
+[resource]
+script = ExtResource( 1 )
+job_name = "Rogue"
+maxHP = 12
+maxMP = 3
+STR = 10
+DEF = 10
+SPD = 15
+moveStat = 5
+atkRangeStat = 1
+spriteSheet = ExtResource( 3 )
+manaType = ExtResource( 2 )
+skillList = [ ExtResource( 4 ) ]

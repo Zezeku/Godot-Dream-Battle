@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://Job System/Mana System/JobManaType.gd" type="Script" id=1]
+[ext_resource path="res://Assets/ResourceBars/SpiritPoint.tscn" type="PackedScene" id=2]
+
+[resource]
+script = ExtResource( 1 )
+mana_type = "Spirit"
+maxMana = 3
+GUI = ExtResource( 2 )

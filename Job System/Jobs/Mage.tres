@@ -1,0 +1,20 @@
+[gd_resource type="Resource" load_steps=5 format=2]
+
+[ext_resource path="res://Job System/Jobs/JobStats.gd" type="Script" id=1]
+[ext_resource path="res://Job System/Mana System/Mana.tres" type="Resource" id=2]
+[ext_resource path="res://Assets/PlayerAnimationMage.tres" type="SpriteFrames" id=3]
+[ext_resource path="res://Job System/Skill System/Skills/AttackMana.tres" type="Resource" id=4]
+
+[resource]
+script = ExtResource( 1 )
+job_name = "Mage"
+maxHP = 10
+maxMP = 30
+STR = 2
+DEF = 2
+SPD = 6
+moveStat = 3
+atkRangeStat = 2
+spriteSheet = ExtResource( 3 )
+manaType = ExtResource( 2 )
+skillList = [ ExtResource( 4 ) ]

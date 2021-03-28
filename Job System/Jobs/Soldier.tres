@@ -1,0 +1,21 @@
+[gd_resource type="Resource" load_steps=6 format=2]
+
+[ext_resource path="res://Job System/Mana System/Energy.tres" type="Resource" id=1]
+[ext_resource path="res://Job System/Jobs/JobStats.gd" type="Script" id=2]
+[ext_resource path="res://Assets/PlayerAnimationSoldier.tres" type="SpriteFrames" id=3]
+[ext_resource path="res://Job System/Skill System/Skills/Smash.tres" type="Resource" id=4]
+[ext_resource path="res://Job System/Skill System/Skills/AttackEnergy.tres" type="Resource" id=5]
+
+[resource]
+script = ExtResource( 2 )
+job_name = "Soldier"
+maxHP = 25
+maxMP = 8
+STR = 14
+DEF = 12
+SPD = 8
+moveStat = 3
+atkRangeStat = 1
+spriteSheet = ExtResource( 3 )
+manaType = ExtResource( 1 )
+skillList = [ ExtResource( 5 ), ExtResource( 4 ) ]
