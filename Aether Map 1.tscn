@@ -1,0 +1,282 @@
+[gd_scene load_steps=33 format=2]
+
+[ext_resource path="res://Maps/Aether Map.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Unit Scripts/UnitManager.gd" type="Script" id=2]
+[ext_resource path="res://Assets/EnemyAnimation.tres" type="SpriteFrames" id=4]
+[ext_resource path="res://PopUpSkillUI.gd" type="Script" id=5]
+[ext_resource path="res://UI.gd" type="Script" id=7]
+[ext_resource path="res://Scenehandler.gd" type="Script" id=8]
+[ext_resource path="res://Grid/Grid.gd" type="Script" id=9]
+[ext_resource path="res://CameraNode.gd" type="Script" id=10]
+[ext_resource path="res://TurnQueue.gd" type="Script" id=11]
+[ext_resource path="res://Assets/MoveCursor.png" type="Texture" id=12]
+[ext_resource path="res://Unit Scripts/Player Scripts/Player.gd" type="Script" id=13]
+[ext_resource path="res://Unit Scripts/Enemy Scripts/Enemy.gd" type="Script" id=14]
+[ext_resource path="res://Unit Scripts/Units.gd" type="Script" id=15]
+[ext_resource path="res://Unit Scripts/Enemy Scripts/Enemy1.gd" type="Script" id=20]
+[ext_resource path="res://Unit Scripts/Enemy Scripts/Enemy3.gd" type="Script" id=21]
+[ext_resource path="res://Unit Scripts/Enemy Scripts/Enemy2.gd" type="Script" id=22]
+[ext_resource path="res://BattleFSM/StateMachine.gd" type="Script" id=23]
+[ext_resource path="res://BattleFSM/NewTurnState.gd" type="Script" id=24]
+[ext_resource path="res://BattleFSM/BattleMenuState.gd" type="Script" id=25]
+[ext_resource path="res://BattleFSM/MoveState.gd" type="Script" id=26]
+[ext_resource path="res://BattleFSM/ActState.gd" type="Script" id=27]
+[ext_resource path="res://BattleFSM/WaitState.gd" type="Script" id=28]
+[ext_resource path="res://BattleFSM/EndTurnState.gd" type="Script" id=29]
+[ext_resource path="res://BattleFSM/State.gd" type="Script" id=30]
+[ext_resource path="res://BattleFSM/ViewState.gd" type="Script" id=31]
+[ext_resource path="res://BattleFSM/ConfirmActState.gd" type="Script" id=32]
+
+[sub_resource type="BoxShape" id=1]
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends \"res://BattleFSM/State.gd\"
+
+func change_state(next_state):
+	_fsm.change_to(next_state)
+	
+func enter(fsm:StateMachine):
+	_fsm = fsm
+	if Unit.activeUnit.jobData.skillList:
+		UI.get_node(\"SkillList\").initSkillList(Unit.activeUnit)
+	UI.get_node(\"SkillList\").popup()
+
+func inputResetTurn():
+	UI.get_node(\"SkillList\").hide()
+	change_state(\"BattleMenuState\")
+
+func inputEnter():
+	pass
+
+func mouseButtonClick():
+	pass
+
+func inputCursorUp():
+	pass
+func inputCursorDown():
+	pass
+func inputCursorLeft():
+	pass
+func inputCursorRight():
+	pass
+func checkForTarget():
+	pass
+
+
+func _on_SkillList_index_pressed(index):
+	Unit.activeUnit.activeSkill = Unit.activeUnit.jobData.skillList[index+1]
+	print(Unit.activeUnit.activeSkill.skill_name)
+	change_state(\"ActState\")
+"
+
+[sub_resource type="CapsuleMesh" id=3]
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_color = Color( 0.94902, 0.607843, 0.0235294, 1 )
+emission_enabled = true
+emission = Color( 0.94902, 0.607843, 0.0235294, 1 )
+emission_energy = 1.0
+emission_operator = 0
+emission_on_uv2 = false
+
+[sub_resource type="ProceduralSky" id=5]
+
+[sub_resource type="Environment" id=6]
+background_mode = 2
+background_sky = SubResource( 5 )
+background_color = Color( 0.254902, 0.0313726, 0.0313726, 1 )
+background_energy = 1.5
+ambient_light_color = Color( 0.584314, 0.466667, 0.780392, 1 )
+ambient_light_energy = 0.5
+fog_color = Color( 0.223529, 0.356863, 0.494118, 1 )
+glow_enabled = true
+glow_intensity = 2.0
+adjustment_enabled = true
+adjustment_saturation = 1.83
+
+[node name="SceneHandler" type="Node"]
+script = ExtResource( 8 )
+
+[node name="UnitManager" type="Node" parent="."]
+script = ExtResource( 2 )
+
+[node name="Units" type="Spatial" parent="UnitManager"]
+script = ExtResource( 15 )
+
+[node name="Player" type="Spatial" parent="UnitManager/Units"]
+script = ExtResource( 13 )
+
+[node name="Enemy" type="Spatial" parent="UnitManager/Units"]
+script = ExtResource( 14 )
+
+[node name="Enemy1" type="KinematicBody" parent="UnitManager/Units/Enemy"]
+transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 8.5, 1.8, -8.5 )
+script = ExtResource( 20 )
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="UnitManager/Units/Enemy/Enemy1"]
+opacity = 0.9
+pixel_size = 0.02
+billboard = 1
+shaded = true
+frames = ExtResource( 4 )
+animation = "New Anim"
+playing = true
+
+[node name="CollisionShape" type="CollisionShape" parent="UnitManager/Units/Enemy/Enemy1"]
+transform = Transform( 0.45, 0, 0, 0, 1, 0, 0, 0, 0.45, 0, 0, 0 )
+shape = SubResource( 1 )
+
+[node name="Enemy3" type="KinematicBody" parent="UnitManager/Units/Enemy"]
+transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 8.5, 1.8, -4.5 )
+collision_mask = 2147483649
+script = ExtResource( 21 )
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="UnitManager/Units/Enemy/Enemy3"]
+opacity = 0.9
+pixel_size = 0.02
+billboard = 1
+shaded = true
+frames = ExtResource( 4 )
+animation = "New Anim"
+playing = true
+
+[node name="CollisionShape" type="CollisionShape" parent="UnitManager/Units/Enemy/Enemy3"]
+transform = Transform( 0.45, 0, 0, 0, 1, 0, 0, 0, 0.45, 0, 0, 0 )
+shape = SubResource( 1 )
+
+[node name="Enemy2" type="KinematicBody" parent="UnitManager/Units/Enemy"]
+transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 1.5, 1.8, -4.5 )
+script = ExtResource( 22 )
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="UnitManager/Units/Enemy/Enemy2"]
+opacity = 0.9
+pixel_size = 0.02
+billboard = 1
+shaded = true
+frames = ExtResource( 4 )
+animation = "New Anim"
+frame = 1
+playing = true
+
+[node name="CollisionShape" type="CollisionShape" parent="UnitManager/Units/Enemy/Enemy2"]
+transform = Transform( 0.45, 0, 0, 0, 1, 0, 0, 0, 0.45, 0, 0, 0 )
+shape = SubResource( 1 )
+
+[node name="TurnQueue" type="Node" parent="."]
+script = ExtResource( 11 )
+
+[node name="Grid" type="Node" parent="."]
+script = ExtResource( 9 )
+
+[node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource( 7 )
+
+[node name="GUI" type="Control" parent="UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MoveCursor" type="Sprite3D" parent="UI"]
+transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0, 0 )
+visible = false
+billboard = 1
+texture = ExtResource( 12 )
+
+[node name="SkillList" type="PopupMenu" parent="UI"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 192.333
+margin_top = -396.985
+margin_right = 442.333
+margin_bottom = -146.985
+popup_exclusive = true
+hide_on_state_item_selection = true
+script = ExtResource( 5 )
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 23 )
+
+[node name="State" type="Node" parent="StateMachine"]
+script = ExtResource( 30 )
+
+[node name="NewTurnState" type="Node" parent="StateMachine/State"]
+script = ExtResource( 24 )
+
+[node name="BattleMenuState" type="Node" parent="StateMachine/State"]
+script = ExtResource( 25 )
+
+[node name="MoveState" type="Node" parent="StateMachine/State"]
+script = ExtResource( 26 )
+
+[node name="ActState" type="Node" parent="StateMachine/State"]
+script = ExtResource( 27 )
+
+[node name="WaitState" type="Node" parent="StateMachine/State"]
+script = ExtResource( 28 )
+
+[node name="EndTurnState" type="Node" parent="StateMachine/State"]
+script = ExtResource( 29 )
+
+[node name="ViewState" type="Node" parent="StateMachine/State"]
+script = ExtResource( 31 )
+
+[node name="ConfirmActState" type="Node" parent="StateMachine/State"]
+script = ExtResource( 32 )
+
+[node name="SkillState" type="Node" parent="StateMachine/State"]
+script = SubResource( 2 )
+
+[node name="Map" type="Spatial" parent="."]
+
+[node name="Wall Lamp" type="MeshInstance" parent="Map"]
+transform = Transform( 0.496392, 0, 0, 0, 0.265083, 0, 0, 0, 0.207603, 5, 2.30866, -4.74403 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="Aether Map" parent="Map" instance=ExtResource( 1 )]
+
+[node name="CameraNode" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -5 )
+script = ExtResource( 10 )
+
+[node name="Camera" type="ClippedCamera" parent="CameraNode"]
+transform = Transform( 0.707107, -0.298836, 0.640856, 0, 0.906308, 0.422618, -0.707107, -0.298836, 0.640856, 10, 10, 10 )
+projection = 1
+size = 10.0
+near = 0.01
+margin = 0.1
+process_mode = 1
+collision_mask = 0
+
+[node name="Tween" type="Tween" parent="CameraNode"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 6 )
+
+[node name="OmniLight" type="OmniLight" parent="WorldEnvironment"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.70281, 1.84726, -3.3717 )
+light_color = Color( 1, 0.631373, 0, 1 )
+light_energy = 5.0
+omni_range = 1.9
+omni_attenuation = 0.732043
+
+[node name="OmniLight3" type="OmniLight" parent="WorldEnvironment"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.09604, 1.84726, -0.728587 )
+light_color = Color( 1, 0.631373, 0, 1 )
+light_energy = 5.0
+omni_range = 1.9
+omni_attenuation = 0.732043
+
+[node name="OmniLight2" type="OmniLight" parent="WorldEnvironment"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.68957, 1.84726, -6.03617 )
+light_color = Color( 1, 0.631373, 0, 1 )
+light_energy = 2.5
+omni_range = 3.0
+omni_attenuation = 1.07177
+[connection signal="attackCharacter" from="UI" to="StateMachine/State/BattleMenuState" method="_on_UI_attackCharacter"]
+[connection signal="moveCharacter" from="UI" to="StateMachine/State/BattleMenuState" method="_on_UI_moveCharacter"]
+[connection signal="skillCharacter" from="UI" to="StateMachine/State/BattleMenuState" method="_on_UI_skillCharacter"]
+[connection signal="waitCharacter" from="UI" to="StateMachine/State/BattleMenuState" method="_on_UI_waitCharacter"]
+[connection signal="index_pressed" from="UI/SkillList" to="StateMachine/State/SkillState" method="_on_SkillList_index_pressed"]

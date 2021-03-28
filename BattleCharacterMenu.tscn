@@ -1,0 +1,377 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://BattleCharacterMenu.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Font/mathFont.tres" type="DynamicFont" id=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.792157, 0.0941176, 0.0941176, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.447059, 0.00784314, 0.00784314, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0, 0, 0, 1 )
+shadow_color = Color( 0.301961, 0.00392157, 0.00392157, 0.6 )
+shadow_size = 3
+
+[sub_resource type="StyleBoxFlat" id=3]
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.278431, 0.270588, 0.14902, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0, 0, 0, 1 )
+shadow_color = Color( 0.333333, 0.364706, 0, 0.6 )
+shadow_size = 3
+
+[node name="BattleCharacterMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 11.7404
+margin_top = -2.22272
+margin_right = 11.7402
+margin_bottom = -2.22278
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="NinePatchRect" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -450.0
+margin_right = 720.0
+rect_min_size = Vector2( 720, 450 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VSpacing" type="VBoxContainer" parent="Background"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="Background/VSpacing"]
+margin_right = 720.0
+margin_bottom = 9.0
+rect_min_size = Vector2( 0, 9 )
+
+[node name="Main" type="HBoxContainer" parent="Background/VSpacing"]
+margin_top = 9.0
+margin_right = 720.0
+margin_bottom = 441.0
+size_flags_vertical = 3
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="Background/VSpacing/Main"]
+margin_right = 16.0
+margin_bottom = 432.0
+rect_min_size = Vector2( 16, 0 )
+
+[node name="LeftSideMenus" type="VBoxContainer" parent="Background/VSpacing/Main"]
+margin_left = 16.0
+margin_right = 352.0
+margin_bottom = 432.0
+rect_min_size = Vector2( 336, 0 )
+size_flags_horizontal = 3
+custom_constants/separation = 15
+
+[node name="CharacterPortraitSpace" type="MarginContainer" parent="Background/VSpacing/Main/LeftSideMenus"]
+visible = false
+margin_right = 212.0
+margin_bottom = 130.0
+rect_min_size = Vector2( 0, 130 )
+
+[node name="StatusBars" type="HBoxContainer" parent="Background/VSpacing/Main/LeftSideMenus"]
+margin_right = 336.0
+margin_bottom = 84.0
+rect_min_size = Vector2( 336, 0 )
+custom_constants/separation = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/VSpacing/Main/LeftSideMenus/StatusBars"]
+margin_right = 120.0
+margin_bottom = 84.0
+rect_min_size = Vector2( 120, 0 )
+custom_constants/separation = 0
+alignment = 1
+
+[node name="HP" type="Label" parent="Background/VSpacing/Main/LeftSideMenus/StatusBars/VBoxContainer"]
+margin_right = 120.0
+margin_bottom = 28.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "HP 0 / 0"
+align = 1
+
+[node name="MP" type="Label" parent="Background/VSpacing/Main/LeftSideMenus/StatusBars/VBoxContainer"]
+margin_top = 28.0
+margin_right = 120.0
+margin_bottom = 56.0
+custom_fonts/font = ExtResource( 2 )
+text = "MP 0 / 0"
+align = 1
+
+[node name="EXP" type="Label" parent="Background/VSpacing/Main/LeftSideMenus/StatusBars/VBoxContainer"]
+margin_top = 56.0
+margin_right = 120.0
+margin_bottom = 84.0
+custom_fonts/font = ExtResource( 2 )
+text = "EXP 0 / 0"
+align = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Background/VSpacing/Main/LeftSideMenus/StatusBars"]
+margin_left = 120.0
+margin_right = 220.0
+margin_bottom = 84.0
+rect_min_size = Vector2( 100, 0 )
+custom_constants/separation = 15
+
+[node name="HP Bar" type="ProgressBar" parent="Background/VSpacing/Main/LeftSideMenus/StatusBars/VBoxContainer2"]
+margin_right = 100.0
+margin_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 0
+rect_min_size = Vector2( 100, 14 )
+size_flags_vertical = 1
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
+max_value = 20.0
+value = 10.0
+percent_visible = false
+
+[node name="EXP Bar" type="ProgressBar" parent="Background/VSpacing/Main/LeftSideMenus/StatusBars/VBoxContainer2"]
+modulate = Color( 1, 0.890196, 0, 1 )
+margin_top = 29.0
+margin_right = 100.0
+margin_bottom = 43.0
+grow_horizontal = 0
+grow_vertical = 0
+rect_min_size = Vector2( 100, 14 )
+size_flags_horizontal = 3
+size_flags_vertical = 1
+custom_styles/fg = SubResource( 3 )
+custom_styles/bg = SubResource( 4 )
+value = 50.0
+percent_visible = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Background/VSpacing/Main/LeftSideMenus"]
+margin_top = 99.0
+margin_right = 336.0
+margin_bottom = 297.0
+rect_min_size = Vector2( 336, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Background/VSpacing/Main/LeftSideMenus/HBoxContainer"]
+margin_bottom = 198.0
+custom_constants/separation = 13
+
+[node name="MenuSelectCursorMove" type="Label" parent="Background/VSpacing/Main/LeftSideMenus/HBoxContainer/VBoxContainer2"]
+margin_bottom = 14.0
+
+[node name="MenuSelectCursorAttack" type="Label" parent="Background/VSpacing/Main/LeftSideMenus/HBoxContainer/VBoxContainer2"]
+margin_top = 27.0
+margin_bottom = 41.0
+
+[node name="MenuSelectCursorSkill" type="Label" parent="Background/VSpacing/Main/LeftSideMenus/HBoxContainer/VBoxContainer2"]
+margin_top = 54.0
+margin_bottom = 68.0
+
+[node name="MenuSelectCursorItem" type="Label" parent="Background/VSpacing/Main/LeftSideMenus/HBoxContainer/VBoxContainer2"]
+margin_top = 81.0
+margin_bottom = 95.0
+
+[node name="MenuSelectCursorWait" type="Label" parent="Background/VSpacing/Main/LeftSideMenus/HBoxContainer/VBoxContainer2"]
+margin_top = 108.0
+margin_bottom = 122.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/VSpacing/Main/LeftSideMenus/HBoxContainer"]
+margin_left = 4.0
+margin_right = 104.0
+margin_bottom = 198.0
+custom_constants/separation = 7
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Move Button" type="Button" parent="Background/VSpacing/Main/LeftSideMenus/HBoxContainer/VBoxContainer"]
+margin_right = 100.0
+margin_bottom = 34.0
+rect_min_size = Vector2( 100, 0 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 2 )
+action_mode = 0
+text = "Move"
+
+[node name="Attack Button" type="Button" parent="Background/VSpacing/Main/LeftSideMenus/HBoxContainer/VBoxContainer"]
+margin_top = 41.0
+margin_right = 100.0
+margin_bottom = 75.0
+rect_min_size = Vector2( 100, 10 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 2 )
+text = "Attack"
+
+[node name="Skill Button" type="Button" parent="Background/VSpacing/Main/LeftSideMenus/HBoxContainer/VBoxContainer"]
+margin_top = 82.0
+margin_right = 100.0
+margin_bottom = 116.0
+rect_min_size = Vector2( 100, 10 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 2 )
+text = "Skill"
+
+[node name="Item Button" type="Button" parent="Background/VSpacing/Main/LeftSideMenus/HBoxContainer/VBoxContainer"]
+margin_top = 123.0
+margin_right = 100.0
+margin_bottom = 157.0
+rect_min_size = Vector2( 100, 10 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 2 )
+text = "Item"
+
+[node name="Wait Button" type="Button" parent="Background/VSpacing/Main/LeftSideMenus/HBoxContainer/VBoxContainer"]
+margin_top = 164.0
+margin_right = 100.0
+margin_bottom = 198.0
+rect_min_size = Vector2( 100, 10 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 2 )
+text = "Wait"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Background/VSpacing/Main/LeftSideMenus"]
+margin_top = 312.0
+margin_right = 336.0
+margin_bottom = 372.0
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Background/VSpacing/Main/LeftSideMenus/HBoxContainer2"]
+margin_right = 296.0
+margin_bottom = 60.0
+size_flags_horizontal = 3
+
+[node name="Strength Label" type="Label" parent="Background/VSpacing/Main/LeftSideMenus/HBoxContainer2/VBoxContainer2"]
+margin_right = 296.0
+margin_bottom = 28.0
+custom_fonts/font = ExtResource( 2 )
+text = "STR 0"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Defense Label" type="Label" parent="Background/VSpacing/Main/LeftSideMenus/HBoxContainer2/VBoxContainer2"]
+margin_top = 32.0
+margin_right = 296.0
+margin_bottom = 60.0
+custom_fonts/font = ExtResource( 2 )
+text = "DEF 0"
+valign = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="Background/VSpacing/Main/LeftSideMenus/HBoxContainer2"]
+margin_left = 296.0
+margin_right = 316.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 20, 0 )
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="Background/VSpacing/Main/LeftSideMenus/HBoxContainer2"]
+margin_left = 316.0
+margin_right = 316.0
+margin_bottom = 60.0
+
+[node name="Speed Label" type="Label" parent="Background/VSpacing/Main/LeftSideMenus/HBoxContainer2/VBoxContainer3"]
+margin_bottom = 14.0
+
+[node name="Luck Label" type="Label" parent="Background/VSpacing/Main/LeftSideMenus/HBoxContainer2/VBoxContainer3"]
+margin_top = 18.0
+margin_bottom = 32.0
+
+[node name="MarginContainer3" type="MarginContainer" parent="Background/VSpacing/Main/LeftSideMenus/HBoxContainer2"]
+margin_left = 316.0
+margin_right = 336.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 20, 0 )
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="Background/VSpacing/Main/LeftSideMenus/HBoxContainer2"]
+margin_left = 336.0
+margin_right = 336.0
+margin_bottom = 60.0
+
+[node name="Avoid Label" type="Label" parent="Background/VSpacing/Main/LeftSideMenus/HBoxContainer2/VBoxContainer4"]
+margin_bottom = 14.0
+
+[node name="Enmity Label" type="Label" parent="Background/VSpacing/Main/LeftSideMenus/HBoxContainer2/VBoxContainer4"]
+margin_top = 18.0
+margin_bottom = 32.0
+
+[node name="MarginContainer3" type="MarginContainer" parent="Background/VSpacing/Main"]
+margin_left = 352.0
+margin_right = 368.0
+margin_bottom = 432.0
+rect_min_size = Vector2( 16, 0 )
+
+[node name="RightSideMenus" type="VBoxContainer" parent="Background/VSpacing/Main"]
+margin_left = 368.0
+margin_right = 704.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 200, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 0
+custom_constants/separation = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/VSpacing/Main/RightSideMenus"]
+margin_right = 336.0
+margin_bottom = 40.0
+custom_constants/separation = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Background/VSpacing/Main/RightSideMenus/VBoxContainer"]
+margin_right = 336.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+
+[node name="MarginContainer2" type="MarginContainer" parent="Background/VSpacing/Main"]
+margin_left = 704.0
+margin_right = 720.0
+margin_bottom = 432.0
+rect_min_size = Vector2( 16, 0 )
+
+[node name="MarginContainer2" type="MarginContainer" parent="Background/VSpacing"]
+margin_top = 441.0
+margin_right = 720.0
+margin_bottom = 450.0
+rect_min_size = Vector2( 0, 9 )
+[connection signal="pressed" from="Background/VSpacing/Main/LeftSideMenus/HBoxContainer/VBoxContainer/Move Button" to="." method="_on_Move_Button_pressed"]
+[connection signal="pressed" from="Background/VSpacing/Main/LeftSideMenus/HBoxContainer/VBoxContainer/Attack Button" to="." method="_on_Attack_Button_pressed"]
+[connection signal="pressed" from="Background/VSpacing/Main/LeftSideMenus/HBoxContainer/VBoxContainer/Skill Button" to="." method="_on_Skill_Button_pressed"]
+[connection signal="pressed" from="Background/VSpacing/Main/LeftSideMenus/HBoxContainer/VBoxContainer/Wait Button" to="." method="_on_Wait_Button_pressed"]
